@@ -2,10 +2,11 @@
   "name": "hh_proposal_backend",
   "version": "1.0.0",
   "description": "A Node.js API for the HH_PROPOSAL application",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "node index.js",
-    "lint": "eslint ."
+    "start": "npx ts-node src/server.ts",
+    "lint": "eslint .",
+    "prisma-generate": "npx prisma generate --schema=src/prisma/schema.prisma"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,12 @@
   },
   "homepage": "https://github.com/EXES0FT/HH_PROPOSAL_BACKEND#readme",
   "dependencies": {
-    "@prisma/client": "^7.3.0",
+    "@prisma/client": "^6.19.2",
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3"
+    "jsonwebtoken": "^9.0.3",
+    "prisma": "^6.19.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
