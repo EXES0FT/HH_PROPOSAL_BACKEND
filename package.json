@@ -5,6 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "npx ts-node src/server.ts",
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
     "lint": "eslint .",
     "prisma-generate": "npx prisma generate --schema=src/prisma/schema.prisma"
   },
@@ -39,7 +40,9 @@
     "@typescript-eslint/parser": "^8.54.0",
     "eslint": "^9.39.2",
     "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
     "supertest": "^7.2.2",
-    "ts-jest": "^29.4.6"
+    "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2"
   }
 }

@@ -1,6 +1,7 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-export const errorHandler = (err: any, req: Request, res: Response) => {
+// eslint-disable-next-line (no-unused-vars)
+export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
   res.status(err.status || 500).json({
     message: err.message || 'Internal server error'
   });
