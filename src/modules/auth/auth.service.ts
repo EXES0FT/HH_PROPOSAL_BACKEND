@@ -10,8 +10,6 @@ import { User, omitPassword } from '../users/users.types';
  * @property refresh - Validates a refresh token and issues a new access token.
  * @property profile - Returns the profile information of the currently authenticated user.
  */
-
-
 export const authService = {
   /**
    * Authenticates a user with the provided username and password.
