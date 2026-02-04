@@ -15,8 +15,9 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
       return res.status(401).json({ message: defaultErrorMessage });
     }
 
-    const user = prisma.users.findUnique({ where: { id: jwtPayload.id, username: jwtPayload.username } });
+    const user = prisma.user.findUnique({ where: { id: jwtPayload.id, username: jwtPayload.username } });
     if (!user) return res.status(401).json({ message: defaultErrorMessage });
+    if (!req.body) req.body = {};
     req.body.accessToken = token;
     next();
   } catch(err) {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { User } from '../../types/user';
+import { User } from '../users/users.types';
 
 export type LoginRequest = Request<{ username: string; password: string }>;
 export type LoginResponse = Response<{ accessToken?: string; user?: User, message?: string }>;

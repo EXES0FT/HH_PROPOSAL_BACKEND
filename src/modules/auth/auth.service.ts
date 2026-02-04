@@ -1,7 +1,7 @@
 import { prisma } from '../../prisma/client';
 import { comparePassword } from '../../utils/password';
 import { decodeToken, signToken } from '../../utils/jwt';
-import { User } from '../../types/user';
+import { User, omitPassword } from '../users/users.types';
 
 /**
  * Provides authentication-related services such as user login, token refresh, and profile retrieval.
@@ -27,7 +27,7 @@ export const authService = {
     user: User;
   }> {
     let defaultErrorMessage = 'Invalid credentials';
-    const user = await prisma.users.findFirst({ where: { username } });
+    const user = await prisma.user.findFirst({ where: { username } });
     if (
       !username || !password ||
       !user || !user.username || !user.password
@@ -41,7 +41,7 @@ export const authService = {
     const token = signToken({ id: user.id, username: user.username });
     return {
       accessToken: token,
-      user: user
+      user: omitPassword(user)
     };
   },
 
@@ -76,6 +76,6 @@ export const authService = {
     if (!user || !('id' in user) || !user.id || !('username' in user) || !user.username) {
       throw { status: 400, message: 'Invalid access token' };
     }
-    return { user: user as User };
+    return { user: user as User};
   }
 };
