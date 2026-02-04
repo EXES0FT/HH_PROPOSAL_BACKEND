@@ -1,5 +1,9 @@
 import { authService } from './auth.service';
-import { LoginRequest, LoginResponse, ProfileResponse, RefreshRequest, RefreshResponse } from './auth.types';
+import {
+  LoginRequest, LoginResponse,
+  ProfileRequest, ProfileResponse,
+  RefreshRequest, RefreshResponse,
+} from './auth.types';
 
 export const login = async (req: LoginRequest, res: LoginResponse) => {
   const { username, password } = req.body;
@@ -8,13 +12,14 @@ export const login = async (req: LoginRequest, res: LoginResponse) => {
 };
 
 export const refresh = async (req: RefreshRequest, res: RefreshResponse) => {
-  const { refreshToken } = req.body;
-  const result = await authService.refresh({ refreshToken });
+  const { accessToken } = req.body;
+  const result = await authService.refresh({ accessToken: accessToken });
   res.json(result);
 };
 
-export const profile = async (res: ProfileResponse) => {
-  const result = await authService.profile();
+export const profile = async (req: ProfileRequest, res: ProfileResponse) => {
+  const { accessToken } = req.body;
+  const result = await authService.profile({ accessToken: accessToken });
   res.json(result);
 };
 

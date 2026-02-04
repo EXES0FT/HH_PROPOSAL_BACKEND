@@ -1,4 +1,5 @@
-export const hashPassword = (password: string) => password + '123456';
+//TODO: implement proper hashing
+export const hashPassword = (password: string) => password;
 
 export const comparePassword = (password: string, hash: string) =>
-  password + '123456' === hash;
+  hashPassword(password) === hash;
