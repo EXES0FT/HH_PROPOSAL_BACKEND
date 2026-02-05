@@ -1,5 +1,6 @@
 datasource db {
   provider = "mysql"
+  //TODO: upgrade prisma to v7
   url      = env("DATABASE_URL")
 }
 
