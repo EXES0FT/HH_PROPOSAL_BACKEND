@@ -21,7 +21,7 @@ export const authService = {
    * @throws {Object} Error object with `status` and `message`
    */
   async login({ username, password }: { username: string; password: string }): Promise<{
-    accessToken: string; 
+    accessToken: string;
     user: User;
   }> {
     let defaultErrorMessage = 'Invalid credentials';
@@ -56,9 +56,9 @@ export const authService = {
     if (!user || !('id' in user) || !user.id || !('username' in user) || !user.username) {
       throw { status: 400, message: 'Invalid refresh token' };
     }
-    const newAccesstoken = signToken({ id: user.id, username: user.username });
+    const newAccessToken = signToken({ id: user.id, username: user.username });
     return {
-      accessToken: newAccesstoken
+      accessToken: newAccessToken
     };
   },
 
@@ -74,6 +74,6 @@ export const authService = {
     if (!user || !('id' in user) || !user.id || !('username' in user) || !user.username) {
       throw { status: 400, message: 'Invalid access token' };
     }
-    return { user: user as User};
+    return { user: user as User };
   }
 };
