@@ -1,5 +1,3 @@
-//TODO: implement proper hashing
-export const hashPassword = (password: string) => password;
+import bcrypt from 'bcrypt';
 
-export const comparePassword = (password: string, hash: string) =>
-  hashPassword(password) === hash;
+export const comparePassword = (password: string, hash: string) => bcrypt.compare(password, hash);

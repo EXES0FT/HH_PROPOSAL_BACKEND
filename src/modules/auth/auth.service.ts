@@ -33,7 +33,7 @@ export const authService = {
       throw { status: 400, message: defaultErrorMessage };
     }
 
-    const valid = comparePassword(password, user.password);
+    const valid = await comparePassword(password, user.password);
     if (!valid) throw { status: 400, message: defaultErrorMessage };
 
     const token = signToken({ id: user.id, username: user.username });
