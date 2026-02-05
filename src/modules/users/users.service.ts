@@ -12,8 +12,11 @@ export const usersService = {
    * Retrieves all users from the database, omitting their passwords.
    * @returns An object containing an array of users without passwords.
    */
-  async getAll(): Promise<{ users: User[] }> {
-    const users = await prisma.user.findMany();
+  async getAll(page: number = 1, limit: number = 10): Promise<{ users: User[] }> {
+    const users = await prisma.user.findMany({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
     return { users: users.map(omitPassword) };
   },
   

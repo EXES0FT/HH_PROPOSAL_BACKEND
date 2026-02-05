@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { User as PrismaUser } from '@prisma/client';
 
 export type User = Omit<PrismaUser, 'password'>;
-export type UsersRequest = Request<{ id?: number }>;
+export type UsersRequest = Request<{ id?: number}>;
 export type UsersResponse = Response<{ users?: User[]; user?: User | null; message?: string }>;
 
 export function omitPassword(user: PrismaUser): User {

@@ -14,8 +14,11 @@ export const customersService = {
    * Retrieves all customers from the database.
    * @returns An object containing an array of customers.
    */
-  async getAll(): Promise<{ customers: Customer[] }> {
-    const customers = await prisma.client.findMany();
+  async getAll(page: number = 1, limit: number = 10): Promise<{ customers: Customer[] }> {
+    const customers = await prisma.client.findMany({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
     return { customers };
   },
 

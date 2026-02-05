@@ -1,0 +1,57 @@
+import { prisma } from '../../prisma/client';
+import { Recommendation } from '@prisma/client';
+
+/**
+ * Service object for handling recommendation-related operations.
+ *
+ * @property getAll - Retrieves all recommendations.
+ * @property getById - Retrieves a recommendation by their unique ID.
+ */
+export const recommendationsService = {
+    /**
+     * Retrieves all recommendations from the database.
+     * @returns An object containing an array of recommendations.
+     */
+    async getAll(page: number = 1, limit: number = 10): Promise<{ recommendations: Recommendation[] }> {
+        const recommendations = await prisma.recommendation.findMany({
+            skip: (page - 1) * limit,
+            take: limit,
+        });
+        return { recommendations };
+    },
+
+    /**
+     * Retrieves a recommendation by their unique arukod.
+     * @param arukod - The unique identifier of the recommendation.
+     * @returns An object containing the recommendation or null if not found.
+     */
+    async getById(id: number): Promise<{ recommendation: Recommendation | null }> {
+        const recommendation = await prisma.recommendation.findUnique({ where: { id: id } });
+        return { recommendation };
+    },
+    async create(recommendationData: any): Promise<{ recommendation: Recommendation | null }> {
+        const { client_id, arukod, recommended_by, recommendation_price } = recommendationData;
+
+        //Check customer exists 
+        const customer = await prisma.client.findUnique({ where: { ID: client_id } });
+        if (!customer) {
+            throw { status: 400, message: 'Customer not found' };
+        }
+
+        //Check if product exists 
+        const product = await prisma.item.findUnique({ where: { arukod: arukod } });
+        if (!product) {
+            throw { status: 400, message: 'Product not found' };
+        }
+
+        const result = await prisma.recommendation.create({
+            data: {
+                client: { connect: { ID: client_id } },
+                item: { connect: { arukod: arukod } },
+                user: { connect: { id: recommended_by } },
+                recommendation_price
+            }
+        });
+        return { recommendation: result };
+    },
+};
