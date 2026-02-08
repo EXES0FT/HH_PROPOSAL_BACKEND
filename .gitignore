@@ -42,3 +42,6 @@ coverage/
 *.tgz
 package-lock.json
 yarn.lock
+
+# Prettier
+.prettier*

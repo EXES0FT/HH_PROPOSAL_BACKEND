@@ -1,11 +1,12 @@
 datasource db {
     provider = "mysql"
-    //TODO: upgrade prisma to v7
-    url      = env("DATABASE_URL")
 }
 
 generator client {
     provider = "prisma-client-js"
+    output = "./generated/prisma-client"
+    engineType = "client"
+    databaseType = "mysql"
 }
 
 model User {

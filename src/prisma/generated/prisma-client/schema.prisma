@@ -1,0 +1,152 @@
+datasource db {
+  provider = "mysql"
+}
+
+generator client {
+  provider     = "prisma-client-js"
+  output       = "./generated/prisma-client"
+  engineType   = "client"
+  databaseType = "mysql"
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  password    String?  @db.VarChar(255)
+  beosztas    String?
+  email       String?  @db.VarChar(255)
+  salesperson Boolean?
+  ID_devices  Int?
+  image       String?  @db.VarChar(40)
+  username    String?  @db.VarChar(255)
+  name        String?  @db.VarChar(255)
+
+  recommendations      Recommendation[]      @relation("UserToRecommendation")
+  recommendationUsages RecommendationUsage[] @relation("UserToRecommendationUsage")
+
+  @@map("users")
+}
+
+model Item {
+  arukod                     Int      @id
+  megnev                     String?  @db.VarChar(255)
+  csoport                    String?  @db.VarChar(56)
+  cikkszam                   String   @db.VarChar(15)
+  has_ready_to_cook_variants Boolean? @db.TinyInt
+  ear                        Decimal? @db.Decimal(20, 2)
+  ear4                       Decimal? @db.Decimal(20, 2)
+  ear3                       Decimal? @db.Decimal(20, 2)
+  ear1                       Decimal? @db.Decimal(20, 2)
+  tipus                      Int      @default(-1)
+  new                        Boolean? @default(true) @db.TinyInt
+  keszlet                    Float?
+  batch                      Float?
+  unit                       Float?
+  uom                        String?  @db.VarChar(30)
+  passziv                    Boolean? @default(false) @db.Bit(1)
+  fix                        Boolean  @default(false) @db.TinyInt
+  fix_name                   String?  @db.VarChar(255)
+  sold_in_batches            Boolean? @default(false) @db.TinyInt
+  hide_batch                 Boolean? @default(false) @db.TinyInt
+  rendelheto                 Boolean  @default(false) @db.Bit(1)
+  search_blob                String?  @db.Text
+  custom_unit                Float?
+  image                      String?  @db.Text
+  vat                        Float?   @default(1.27)
+
+  recommendations Recommendation[] @relation("ItemToRecommendation")
+
+  @@map("items")
+}
+
+model Client {
+  ID                     Int      @id
+  vat                    String?  @db.VarChar(50)
+  name                   String?  @db.VarChar(100)
+  address_city           String?  @db.VarChar(40)
+  address_zip            String?  @db.VarChar(10)
+  address_combined       String?  @db.VarChar(100)
+  del                    Boolean? @db.TinyInt
+  email                  String?  @db.VarChar(100)
+  ID_salesman            Int?
+  ID_branch              String?  @db.VarChar(200)
+  seasonal               String?  @db.VarChar(25)
+  sms_group              Int?
+  business_name          String?  @db.VarChar(50)
+  UNAS_customer_group_ID Int?
+  discount_group_id      Int?
+  discount_percentage    Float?
+  teruleti_id            Int?
+
+  recommendations Recommendation[] @relation("ClientToRecommendation")
+
+  @@map("clients")
+}
+
+model Order {
+  sorszam        String    @id @db.VarChar(255)
+  telj           DateTime?
+  kelt           DateTime?
+  vevokod        Int?
+  vevo           String?   @db.VarChar(200)
+  city           String?   @db.VarChar(100)
+  address        String?   @db.VarChar(200)
+  zip            String?   @db.VarChar(8)
+  del            Boolean   @default(false) @db.TinyInt
+  deleted_by     String?   @db.VarChar(255)
+  delete_comment String?   @db.VarChar(200)
+
+  orderItems OrderItem[] @relation("OrderToOrderItem")
+}
+
+model OrderItem {
+  unikazon  String  @id @db.VarChar(10)
+  sorszam   String  @db.VarChar(15)
+  mennyiseg Float?
+  egyseg    String? @db.VarChar(10)
+  netto     Float?
+  brutto    Float?
+  cikkszam  String  @db.VarChar(50)
+
+  order                Order                 @relation(fields: [sorszam], references: [sorszam], name: "OrderToOrderItem")
+  recommendationUsages RecommendationUsage[] @relation("OrderItemToRecommendationUsage")
+
+  @@map("order_items")
+}
+
+model Recommendation {
+  id                   Int      @id @default(autoincrement())
+  client_id            Int
+  arukod               Int
+  recommended_by       Int
+  recommendation_price Decimal  @db.Decimal(10, 0)
+  recommended_at       DateTime @default(now())
+
+  client               Client                @relation(fields: [client_id], references: [ID], name: "ClientToRecommendation")
+  item                 Item                  @relation(fields: [arukod], references: [arukod], name: "ItemToRecommendation")
+  user                 User                  @relation(fields: [recommended_by], references: [id], name: "UserToRecommendation")
+  recommendationUsages RecommendationUsage[] @relation("RecommendationToRecommendationUsage")
+
+  @@index([client_id], name: "idx_recommendations_client_id")
+  @@index([arukod], name: "idx_recommendations_arukod")
+  @@index([recommended_by], name: "idx_recommendations_recommended_by")
+  @@map("recommendations")
+}
+
+model RecommendationUsage {
+  id                Int      @id @default(autoincrement())
+  recommendation_id Int
+  order_item_id     String   @db.VarChar(10)
+  confirmed_by      Int
+  is_rec_by_sales   Boolean  @default(false) @db.TinyInt
+  is_influenced     Boolean  @default(false) @db.TinyInt
+  created_at        DateTime @default(now())
+
+  recommendation Recommendation @relation(fields: [recommendation_id], references: [id], name: "RecommendationToRecommendationUsage")
+  orderItem      OrderItem      @relation(fields: [order_item_id], references: [unikazon], name: "OrderItemToRecommendationUsage")
+  user           User           @relation(fields: [confirmed_by], references: [id], name: "UserToRecommendationUsage")
+
+  @@index([confirmed_by], name: "idx_recommendation_usages_confirmed_by")
+  @@index([recommendation_id], name: "idx_recommendation_usages_recommendation_id")
+  @@index([order_item_id], name: "idx_recommendation_usages_order_item_id")
+  @@map("recommendation_usages")
+}
