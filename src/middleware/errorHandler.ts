@@ -1,8 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
+import logger from '../config/logger';
 
-// eslint-disable-next-line no-unused-vars
-export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
+// Express error-handling middleware
+export function errorHandler(
+  err: any,
+  req: Request,
+  res: Response, 
+  next: NextFunction,
+) {
+  logger.error(
+    `Error: ${err.message} | Status: ${err.status || 500} | URL: ${req.method} ${req.url}`,
+  );
   res.status(err.status || 500).json({
-    message: err.message || 'Internal server error'
+    message: err.message || 'Internal server error',
   });
-};
+}
