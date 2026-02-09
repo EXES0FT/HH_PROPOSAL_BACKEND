@@ -14,11 +14,25 @@ export const getById = async (req: ProductsRequest, res: ProductsResponse) => {
   return res.json(result);
 };
 
-export const getByIdWithRecommendations = async (req: ProductsRequest, res: ProductsResponse) => {
+export const getByNameSlug = async (
+  req: ProductsRequest,
+  res: ProductsResponse,
+) => {
+  const nameSlug = req.params.nameSlug!;
+  const result = await productsService.getByNameSlug(nameSlug);
+  return res.json(result);
+};
+
+export const getByIdWithRecommendations = async (
+  req: ProductsRequest,
+  res: ProductsResponse,
+) => {
   const productId = req.params.id;
   if (!productId) {
     return res.status(400).json({ message: 'Invalid productId!' });
   }
-  const result = await productsService.getByIdWithRecommendations(Number(productId));
+  const result = await productsService.getByIdWithRecommendations(
+    Number(productId),
+  );
   return res.json(result);
 };
