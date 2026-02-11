@@ -4,7 +4,7 @@ import { prisma } from '../prisma/client';
 import { omitPassword } from '../modules/users/users.types';
 import { z } from 'zod';
 
-const expiresIn: string = env.jwtExpiresIn || '7d';
+const expiresIn: string = env.jwtExpiresIn;
 const jwtSecret: string = env.jwtSecret;
 
 export const signToken = (payload: Record<string, any>) =>
