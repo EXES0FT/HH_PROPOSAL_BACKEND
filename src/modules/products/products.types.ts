@@ -1,7 +1,11 @@
 import { Request, Response } from 'express';
-import { Item, Recommendation } from '@prisma/client';
+import { Recommendation } from '@prisma/client';
 
-export type Product = Item;
+export type Product = {
+  arukod: number;
+  megnev: string | null;
+  cikkszam: string;
+};
 export type ProductsRequest = Request<{ id?: number; nameSlug?: string }>;
 export type ProductsResponse = Response<{
   products?: Product[];

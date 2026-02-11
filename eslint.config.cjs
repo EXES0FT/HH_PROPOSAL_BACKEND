@@ -23,6 +23,7 @@ const nodeAndES2021Globals = {
 module.exports = [
   {
     files: ['**/*.js'],
+    ignores: ['src/prisma/**'],
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: 'commonjs',
@@ -31,12 +32,13 @@ module.exports = [
     rules: {
       'no-unused-vars': 'warn',
       'no-console': 'off',
-      'semi': ['error', 'always'],
-      'quotes': ['error', 'single'],
+      semi: ['error', 'always'],
+      quotes: ['error', 'single'],
     },
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
+    ignores: ['src/prisma/**'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -51,8 +53,8 @@ module.exports = [
     rules: {
       'no-unused-vars': 'warn',
       'no-console': 'off',
-      'semi': ['error', 'always'],
-      'quotes': ['error', 'single'],
+      semi: ['error', 'always'],
+      quotes: ['error', 'single'],
     },
   },
 ];

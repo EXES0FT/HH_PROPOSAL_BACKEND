@@ -18,8 +18,15 @@ export const productsService = {
     limit: number = 10,
   ): Promise<{ products: Product[] }> {
     const products = await prisma.item.findMany({
-      skip: (page - 1) * limit,
-      take: limit,
+      // skip: (page - 1) * limit,
+      // take: limit,
+      select: {
+        arukod: true,
+        megnev: true,
+        cikkszam: true,
+      },
+      where: { passziv: false },
+      distinct: ['cikkszam'],
     });
     return { products };
   },

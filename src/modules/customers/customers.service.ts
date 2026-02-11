@@ -14,10 +14,21 @@ export const customersService = {
    * Retrieves all customers from the database.
    * @returns An object containing an array of customers.
    */
-  async getAll(page: number = 1, limit: number = 10): Promise<{ customers: Customer[] }> {
+  async getAll(
+    page: number = 1,
+    limit: number = 10,
+  ): Promise<{ customers: Customer[] }> {
     const customers = await prisma.client.findMany({
-      skip: (page - 1) * limit,
-      take: limit,
+      // skip: (page - 1) * limit,
+      // take: limit,
+      select: {
+        name: true,
+        ID: true,
+        address_city: true,
+        address_zip: true,
+        address_combined: true,
+      },
+      where: { del: false },
     });
     return { customers };
   },
@@ -41,9 +52,9 @@ export const customersService = {
     const customers = await prisma.client.findMany({
       where: {
         name: {
-          contains: slug
-        }
-      }
+          contains: slug,
+        },
+      },
     });
     return { customers };
   },
@@ -53,11 +64,13 @@ export const customersService = {
    * @param id - The unique identifier of the customer.
    * @returns An object containing the customer with recommendations or null if not found.
    */
-  async getByIdWithRecommendations(id: number): Promise<{ customer: Customer | null }> {
+  async getByIdWithRecommendations(
+    id: number,
+  ): Promise<{ customer: Customer | null }> {
     const customer = await prisma.client.findUnique({
       where: { ID: id },
       include: { recommendations: true },
     });
     return { customer };
-  }
+  },
 };

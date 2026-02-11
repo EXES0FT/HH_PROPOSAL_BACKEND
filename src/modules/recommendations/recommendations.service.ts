@@ -17,8 +17,8 @@ export const recommendationsService = {
     limit: number = 10,
   ): Promise<{ recommendations: Recommendation[] }> {
     const recommendations = await prisma.recommendation.findMany({
-      skip: (page - 1) * limit,
-      take: limit,
+      // skip: (page - 1) * limit,
+      // take: limit,
     });
     return { recommendations };
   },
