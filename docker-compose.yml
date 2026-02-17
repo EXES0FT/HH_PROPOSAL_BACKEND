@@ -11,9 +11,15 @@ services:
         condition: service_healthy
     environment:
       - NODE_ENV=development
-    volumes:
-      - .:/app
     command: npm start
+    develop:
+      watch:
+        - action: sync
+          path: ./
+          target: /app/
+          initial_sync: true
+          ignore:
+            - node_modules/
 
   hh-proposal-backend-db:
     container_name: hh-proposal-backend-db

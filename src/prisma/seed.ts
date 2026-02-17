@@ -29,9 +29,9 @@ async function main() {
   console.log('Seeding database...');
 
   await prisma.user.create({
+    //bakosip - bakosip
     data: {
-      password:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAwMDAwMTEsInVzZXJuYW1lIjoiYmFrb3NpcCJ9.RYs282ZM9336fR-8oY8TI1hl3F9mzvfyAsk3uwgSSdg',
+      password: '$2a$12$.LsSP222VGI3LlQCWHPNVeB.6kXiP096TEUgoF0QkkEtELfXpYAMO',
       beosztas: '',
       email: 'bakosi.peter@exesoft.hu',
       salesperson: true,
