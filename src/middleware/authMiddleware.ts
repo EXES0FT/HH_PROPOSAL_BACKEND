@@ -34,7 +34,8 @@ export const authMiddleware = async (
     if (!req.body) req.body = {};
     req.body.accessToken = token;
     next();
+    // eslint-disable-next-line no-unused-vars
   } catch (err) {
-    return res.status(401).json({ message: defaultErrorMessage + err });
+    return res.status(401).json({ message: defaultErrorMessage });
   }
 };

@@ -21,6 +21,7 @@ export const getRecommendationsSchema = z.object({
 
 export const createSchema = z
   .object({
+    client_id: z.number().int().positive().min(1),
     arukod: z.number().positive().min(1),
     recommendation_price: z.string().min(1),
   })

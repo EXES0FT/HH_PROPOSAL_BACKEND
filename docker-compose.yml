@@ -11,7 +11,7 @@ services:
         condition: service_healthy
     environment:
       - NODE_ENV=development
-    command: npm start
+    command: npm run dev
     develop:
       watch:
         - action: sync
