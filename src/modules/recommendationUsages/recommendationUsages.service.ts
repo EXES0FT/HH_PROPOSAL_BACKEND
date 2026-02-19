@@ -24,8 +24,8 @@ export const recommendationUsagesService = {
   },
 
   /**
-   * Retrieves a recommendationUsage by their unique arukod.
-   * @param arukod - The unique identifier of the recommendationUsage.
+   * Retrieves a recommendationUsage by their unique ID.
+   * @param id - The unique identifier of the recommendationUsage.
    * @returns An object containing the recommendationUsage or null if not found.
    */
   async getById(
