@@ -39,13 +39,8 @@ export const recommendationUsagesService = {
   async create(
     recommendationUsageData: any,
   ): Promise<{ recommendationUsage: RecommendationUsage | null }> {
-    const {
-      recommendation_id,
-      order_item_id,
-      confirmed_by,
-      is_rec_by_sales,
-      is_influenced,
-    } = recommendationUsageData;
+    const { recommendation_id, order_item_id, confirmed_by, is_influenced } =
+      recommendationUsageData;
 
     //Check if recommendation exists
     const recommendation = await prisma.recommendation.findUnique({
@@ -74,7 +69,6 @@ export const recommendationUsagesService = {
         recommendation: { connect: { id: recommendation_id } },
         orderItem: { connect: { unikazon: order_item_id } },
         user: { connect: { id: confirmed_by } },
-        is_rec_by_sales,
         is_influenced,
       },
     });

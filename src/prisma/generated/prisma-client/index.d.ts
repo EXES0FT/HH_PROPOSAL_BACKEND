@@ -8140,7 +8140,6 @@ export namespace Prisma {
     recommendation_id: number | null
     order_item_id: string | null
     confirmed_by: number | null
-    is_rec_by_sales: boolean | null
     is_influenced: boolean | null
     created_at: Date | null
   }
@@ -8150,7 +8149,6 @@ export namespace Prisma {
     recommendation_id: number | null
     order_item_id: string | null
     confirmed_by: number | null
-    is_rec_by_sales: boolean | null
     is_influenced: boolean | null
     created_at: Date | null
   }
@@ -8160,7 +8158,6 @@ export namespace Prisma {
     recommendation_id: number
     order_item_id: number
     confirmed_by: number
-    is_rec_by_sales: number
     is_influenced: number
     created_at: number
     _all: number
@@ -8184,7 +8181,6 @@ export namespace Prisma {
     recommendation_id?: true
     order_item_id?: true
     confirmed_by?: true
-    is_rec_by_sales?: true
     is_influenced?: true
     created_at?: true
   }
@@ -8194,7 +8190,6 @@ export namespace Prisma {
     recommendation_id?: true
     order_item_id?: true
     confirmed_by?: true
-    is_rec_by_sales?: true
     is_influenced?: true
     created_at?: true
   }
@@ -8204,7 +8199,6 @@ export namespace Prisma {
     recommendation_id?: true
     order_item_id?: true
     confirmed_by?: true
-    is_rec_by_sales?: true
     is_influenced?: true
     created_at?: true
     _all?: true
@@ -8301,7 +8295,6 @@ export namespace Prisma {
     recommendation_id: number
     order_item_id: string
     confirmed_by: number
-    is_rec_by_sales: boolean
     is_influenced: boolean
     created_at: Date
     _count: RecommendationUsageCountAggregateOutputType | null
@@ -8330,7 +8323,6 @@ export namespace Prisma {
     recommendation_id?: boolean
     order_item_id?: boolean
     confirmed_by?: boolean
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: boolean
     recommendation?: boolean | RecommendationDefaultArgs<ExtArgs>
@@ -8345,12 +8337,11 @@ export namespace Prisma {
     recommendation_id?: boolean
     order_item_id?: boolean
     confirmed_by?: boolean
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: boolean
   }
 
-  export type RecommendationUsageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recommendation_id" | "order_item_id" | "confirmed_by" | "is_rec_by_sales" | "is_influenced" | "created_at", ExtArgs["result"]["recommendationUsage"]>
+  export type RecommendationUsageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recommendation_id" | "order_item_id" | "confirmed_by" | "is_influenced" | "created_at", ExtArgs["result"]["recommendationUsage"]>
   export type RecommendationUsageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     recommendation?: boolean | RecommendationDefaultArgs<ExtArgs>
     orderItem?: boolean | OrderItemDefaultArgs<ExtArgs>
@@ -8369,7 +8360,6 @@ export namespace Prisma {
       recommendation_id: number
       order_item_id: string
       confirmed_by: number
-      is_rec_by_sales: boolean
       is_influenced: boolean
       created_at: Date
     }, ExtArgs["result"]["recommendationUsage"]>
@@ -8748,7 +8738,6 @@ export namespace Prisma {
     readonly recommendation_id: FieldRef<"RecommendationUsage", 'Int'>
     readonly order_item_id: FieldRef<"RecommendationUsage", 'String'>
     readonly confirmed_by: FieldRef<"RecommendationUsage", 'Int'>
-    readonly is_rec_by_sales: FieldRef<"RecommendationUsage", 'Boolean'>
     readonly is_influenced: FieldRef<"RecommendationUsage", 'Boolean'>
     readonly created_at: FieldRef<"RecommendationUsage", 'DateTime'>
   }
@@ -9242,7 +9231,6 @@ export namespace Prisma {
     recommendation_id: 'recommendation_id',
     order_item_id: 'order_item_id',
     confirmed_by: 'confirmed_by',
-    is_rec_by_sales: 'is_rec_by_sales',
     is_influenced: 'is_influenced',
     created_at: 'created_at'
   };
@@ -9981,7 +9969,6 @@ export namespace Prisma {
     recommendation_id?: IntFilter<"RecommendationUsage"> | number
     order_item_id?: StringFilter<"RecommendationUsage"> | string
     confirmed_by?: IntFilter<"RecommendationUsage"> | number
-    is_rec_by_sales?: BoolFilter<"RecommendationUsage"> | boolean
     is_influenced?: BoolFilter<"RecommendationUsage"> | boolean
     created_at?: DateTimeFilter<"RecommendationUsage"> | Date | string
     recommendation?: XOR<RecommendationScalarRelationFilter, RecommendationWhereInput>
@@ -9994,7 +9981,6 @@ export namespace Prisma {
     recommendation_id?: SortOrder
     order_item_id?: SortOrder
     confirmed_by?: SortOrder
-    is_rec_by_sales?: SortOrder
     is_influenced?: SortOrder
     created_at?: SortOrder
     recommendation?: RecommendationOrderByWithRelationInput
@@ -10011,7 +9997,6 @@ export namespace Prisma {
     recommendation_id?: IntFilter<"RecommendationUsage"> | number
     order_item_id?: StringFilter<"RecommendationUsage"> | string
     confirmed_by?: IntFilter<"RecommendationUsage"> | number
-    is_rec_by_sales?: BoolFilter<"RecommendationUsage"> | boolean
     is_influenced?: BoolFilter<"RecommendationUsage"> | boolean
     created_at?: DateTimeFilter<"RecommendationUsage"> | Date | string
     recommendation?: XOR<RecommendationScalarRelationFilter, RecommendationWhereInput>
@@ -10024,7 +10009,6 @@ export namespace Prisma {
     recommendation_id?: SortOrder
     order_item_id?: SortOrder
     confirmed_by?: SortOrder
-    is_rec_by_sales?: SortOrder
     is_influenced?: SortOrder
     created_at?: SortOrder
     _count?: RecommendationUsageCountOrderByAggregateInput
@@ -10042,7 +10026,6 @@ export namespace Prisma {
     recommendation_id?: IntWithAggregatesFilter<"RecommendationUsage"> | number
     order_item_id?: StringWithAggregatesFilter<"RecommendationUsage"> | string
     confirmed_by?: IntWithAggregatesFilter<"RecommendationUsage"> | number
-    is_rec_by_sales?: BoolWithAggregatesFilter<"RecommendationUsage"> | boolean
     is_influenced?: BoolWithAggregatesFilter<"RecommendationUsage"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"RecommendationUsage"> | Date | string
   }
@@ -10717,7 +10700,6 @@ export namespace Prisma {
   }
 
   export type RecommendationUsageCreateInput = {
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
     recommendation: RecommendationCreateNestedOneWithoutRecommendationUsagesInput
@@ -10730,13 +10712,11 @@ export namespace Prisma {
     recommendation_id: number
     order_item_id: string
     confirmed_by: number
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
   }
 
   export type RecommendationUsageUpdateInput = {
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendation?: RecommendationUpdateOneRequiredWithoutRecommendationUsagesNestedInput
@@ -10749,7 +10729,6 @@ export namespace Prisma {
     recommendation_id?: IntFieldUpdateOperationsInput | number
     order_item_id?: StringFieldUpdateOperationsInput | string
     confirmed_by?: IntFieldUpdateOperationsInput | number
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10759,13 +10738,11 @@ export namespace Prisma {
     recommendation_id: number
     order_item_id: string
     confirmed_by: number
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
   }
 
   export type RecommendationUsageUpdateManyMutationInput = {
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10775,7 +10752,6 @@ export namespace Prisma {
     recommendation_id?: IntFieldUpdateOperationsInput | number
     order_item_id?: StringFieldUpdateOperationsInput | string
     confirmed_by?: IntFieldUpdateOperationsInput | number
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11536,7 +11512,6 @@ export namespace Prisma {
     recommendation_id?: SortOrder
     order_item_id?: SortOrder
     confirmed_by?: SortOrder
-    is_rec_by_sales?: SortOrder
     is_influenced?: SortOrder
     created_at?: SortOrder
   }
@@ -11552,7 +11527,6 @@ export namespace Prisma {
     recommendation_id?: SortOrder
     order_item_id?: SortOrder
     confirmed_by?: SortOrder
-    is_rec_by_sales?: SortOrder
     is_influenced?: SortOrder
     created_at?: SortOrder
   }
@@ -11562,7 +11536,6 @@ export namespace Prisma {
     recommendation_id?: SortOrder
     order_item_id?: SortOrder
     confirmed_by?: SortOrder
-    is_rec_by_sales?: SortOrder
     is_influenced?: SortOrder
     created_at?: SortOrder
   }
@@ -12345,7 +12318,6 @@ export namespace Prisma {
   }
 
   export type RecommendationUsageCreateWithoutUserInput = {
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
     recommendation: RecommendationCreateNestedOneWithoutRecommendationUsagesInput
@@ -12356,7 +12328,6 @@ export namespace Prisma {
     id?: number
     recommendation_id: number
     order_item_id: string
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
   }
@@ -12423,7 +12394,6 @@ export namespace Prisma {
     recommendation_id?: IntFilter<"RecommendationUsage"> | number
     order_item_id?: StringFilter<"RecommendationUsage"> | string
     confirmed_by?: IntFilter<"RecommendationUsage"> | number
-    is_rec_by_sales?: BoolFilter<"RecommendationUsage"> | boolean
     is_influenced?: BoolFilter<"RecommendationUsage"> | boolean
     created_at?: DateTimeFilter<"RecommendationUsage"> | Date | string
   }
@@ -12607,7 +12577,6 @@ export namespace Prisma {
   }
 
   export type RecommendationUsageCreateWithoutOrderItemInput = {
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
     recommendation: RecommendationCreateNestedOneWithoutRecommendationUsagesInput
@@ -12618,7 +12587,6 @@ export namespace Prisma {
     id?: number
     recommendation_id: number
     confirmed_by: number
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
   }
@@ -12825,7 +12793,6 @@ export namespace Prisma {
   }
 
   export type RecommendationUsageCreateWithoutRecommendationInput = {
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
     orderItem: OrderItemCreateNestedOneWithoutRecommendationUsagesInput
@@ -12836,7 +12803,6 @@ export namespace Prisma {
     id?: number
     order_item_id: string
     confirmed_by: number
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
   }
@@ -13205,7 +13171,6 @@ export namespace Prisma {
     id?: number
     recommendation_id: number
     order_item_id: string
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
   }
@@ -13236,7 +13201,6 @@ export namespace Prisma {
   }
 
   export type RecommendationUsageUpdateWithoutUserInput = {
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendation?: RecommendationUpdateOneRequiredWithoutRecommendationUsagesNestedInput
@@ -13247,7 +13211,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     recommendation_id?: IntFieldUpdateOperationsInput | number
     order_item_id?: StringFieldUpdateOperationsInput | string
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13256,7 +13219,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     recommendation_id?: IntFieldUpdateOperationsInput | number
     order_item_id?: StringFieldUpdateOperationsInput | string
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13369,13 +13331,11 @@ export namespace Prisma {
     id?: number
     recommendation_id: number
     confirmed_by: number
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
   }
 
   export type RecommendationUsageUpdateWithoutOrderItemInput = {
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     recommendation?: RecommendationUpdateOneRequiredWithoutRecommendationUsagesNestedInput
@@ -13386,7 +13346,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     recommendation_id?: IntFieldUpdateOperationsInput | number
     confirmed_by?: IntFieldUpdateOperationsInput | number
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13395,7 +13354,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     recommendation_id?: IntFieldUpdateOperationsInput | number
     confirmed_by?: IntFieldUpdateOperationsInput | number
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13404,13 +13362,11 @@ export namespace Prisma {
     id?: number
     order_item_id: string
     confirmed_by: number
-    is_rec_by_sales?: boolean
     is_influenced?: boolean
     created_at?: Date | string
   }
 
   export type RecommendationUsageUpdateWithoutRecommendationInput = {
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItem?: OrderItemUpdateOneRequiredWithoutRecommendationUsagesNestedInput
@@ -13421,7 +13377,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     order_item_id?: StringFieldUpdateOperationsInput | string
     confirmed_by?: IntFieldUpdateOperationsInput | number
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13430,7 +13385,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     order_item_id?: StringFieldUpdateOperationsInput | string
     confirmed_by?: IntFieldUpdateOperationsInput | number
-    is_rec_by_sales?: BoolFieldUpdateOperationsInput | boolean
     is_influenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }

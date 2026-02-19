@@ -126,7 +126,6 @@ CREATE TABLE `recommendation_usages` (
   `recommendation_id` int NOT NULL,
   `order_item_id` varchar(10) NOT NULL,
   `confirmed_by` int NOT NULL,
-  `is_rec_by_sales` tinyint(1) NOT NULL DEFAULT '0',
   `is_influenced` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

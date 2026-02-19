@@ -137,7 +137,6 @@ model RecommendationUsage {
     recommendation_id Int
     order_item_id     String   @db.VarChar(10)
     confirmed_by      Int
-    is_rec_by_sales   Boolean  @default(false) @db.TinyInt
     is_influenced     Boolean  @default(false) @db.TinyInt
     created_at        DateTime @default(now())
 

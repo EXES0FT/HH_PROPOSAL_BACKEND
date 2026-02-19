@@ -218,7 +218,6 @@ exports.Prisma.RecommendationUsageScalarFieldEnum = {
   recommendation_id: 'recommendation_id',
   order_item_id: 'order_item_id',
   confirmed_by: 'confirmed_by',
-  is_rec_by_sales: 'is_rec_by_sales',
   is_influenced: 'is_influenced',
   created_at: 'created_at'
 };
