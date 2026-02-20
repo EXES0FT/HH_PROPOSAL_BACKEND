@@ -40,7 +40,7 @@ export const recommendationUsagesService = {
     confirmed_by: number;
     recommendation_usages: {
       recommendation_id: number;
-      order_item_id?: string;
+      order_item_id: string | null;
       is_influenced?: boolean;
     }[];
   }): Promise<{ recommendationUsages: RecommendationUsage[] | [] }> {
