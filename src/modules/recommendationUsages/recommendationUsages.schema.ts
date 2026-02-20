@@ -19,12 +19,18 @@ export const getRecommendationUsagesSchema = z.object({
   }),
 });
 
+export const createSchema = z
+  .object({
+    recommendation_id: z.number().positive().min(1),
+    order_item_id: z.string().min(1).optional().nullable(),
+    is_influenced: z.boolean().optional(),
+  })
+  .strict();
+
 export const createRecommendationUsageSchema = z.object({
   body: z.object({
     accessToken: z.string().min(1),
-    recommendation_id: z.number().int().positive().min(1),
-    order_item_id: z.string().min(1).max(10),
     confirmed_by: z.number().int().positive().min(1),
-    is_influenced: z.boolean().default(false),
+    recommendation_usages: z.array(createSchema).min(1),
   }),
 });

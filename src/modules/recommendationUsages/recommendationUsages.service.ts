@@ -36,42 +36,45 @@ export const recommendationUsagesService = {
     });
     return { recommendationUsage };
   },
-  async create(
-    recommendationUsageData: any,
-  ): Promise<{ recommendationUsage: RecommendationUsage | null }> {
-    const { recommendation_id, order_item_id, confirmed_by, is_influenced } =
-      recommendationUsageData;
-
-    //Check if recommendation exists
-    const recommendation = await prisma.recommendation.findUnique({
-      where: { id: recommendation_id },
-    });
-    if (!recommendation) {
-      throw { status: 400, message: 'Recommendation not found' };
-    }
-
-    //Check if order item exists
-    const orderItem = await prisma.orderItem.findUnique({
-      where: { unikazon: order_item_id },
-    });
-    if (!orderItem) {
-      throw { status: 400, message: 'Order item not found' };
-    }
-
+  async create(recommendationUsageData: {
+    confirmed_by: number;
+    recommendation_usages: {
+      recommendation_id: number;
+      order_item_id?: string;
+      is_influenced?: boolean;
+    }[];
+  }): Promise<{ recommendationUsages: RecommendationUsage[] | [] }> {
+    const { confirmed_by, recommendation_usages } = recommendationUsageData;
     //Check if user exists
-    const user = await prisma.user.findUnique({ where: { id: confirmed_by } });
+    const user = await prisma.user.findUnique({
+      where: { id: confirmed_by },
+    });
     if (!user) {
       throw { status: 400, message: 'User not found' };
     }
 
-    const result = await prisma.recommendationUsage.create({
-      data: {
-        recommendation: { connect: { id: recommendation_id } },
-        orderItem: { connect: { unikazon: order_item_id } },
-        user: { connect: { id: confirmed_by } },
-        is_influenced,
-      },
-    });
-    return { recommendationUsage: result };
+    const createdRecommendationUsages: RecommendationUsage[] = [];
+    for (const usage of recommendation_usages) {
+      //Check if recommendation exists
+      const recommendation = await prisma.recommendation.findUnique({
+        where: { id: usage.recommendation_id },
+      });
+      if (!recommendation) {
+        throw { status: 400, message: 'Recommendation not found' };
+      }
+      const saveData = {
+        confirmed_by: confirmed_by,
+        recommendation_id: usage.recommendation_id,
+        order_item_id: usage.order_item_id ?? '',
+        is_influenced: usage.is_influenced,
+      };
+      const saveResult = await prisma.recommendationUsage.create({
+        data: saveData,
+      });
+      createdRecommendationUsages.push(saveResult);
+    }
+    return {
+      recommendationUsages: createdRecommendationUsages,
+    };
   },
 };

@@ -124,7 +124,7 @@ CREATE TABLE `recommendations` (
 CREATE TABLE `recommendation_usages` (
   `id` int NOT NULL AUTO_INCREMENT,
   `recommendation_id` int NOT NULL,
-  `order_item_id` varchar(10) NOT NULL,
+  `order_item_id` varchar(10) DEFAULT NULL,
   `confirmed_by` int NOT NULL,
   `is_influenced` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -132,7 +132,6 @@ CREATE TABLE `recommendation_usages` (
   KEY `idx_recommendation_usages_confirmed_by` (`confirmed_by`),
   KEY `idx_recommendation_usages_recommendation_id` (`recommendation_id`),
   KEY `idx_recommendation_usages_order_item_id` (`order_item_id`),
-  CONSTRAINT `fk_order_items_order_item_id` FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`unikazon`),
   CONSTRAINT `fk_recommendation_id` FOREIGN KEY (`recommendation_id`) REFERENCES `recommendations` (`id`),
   CONSTRAINT `fk_users_confirmed_by` FOREIGN KEY (`confirmed_by`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

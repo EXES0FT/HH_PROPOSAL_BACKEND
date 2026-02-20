@@ -36,11 +36,9 @@ export const create = async (
         : rec.recommendation_price,
   }));
   const client_id = req.body.client_id;
-  const arukod = req.body.arukod;
   const recommended_by = req.body.recommended_by;
   const result = await recommendationsService.create({
     client_id,
-    arukod,
     recommended_by,
     recommendations,
   });

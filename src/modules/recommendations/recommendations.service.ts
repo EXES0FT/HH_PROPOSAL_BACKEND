@@ -39,7 +39,6 @@ export const recommendationsService = {
 
   async create(recommendationData: {
     client_id: number;
-    arukod: number;
     recommended_by: number;
     recommendations: { arukod: number; recommendation_price: string }[];
   }): Promise<{ recommendations: Recommendation[] | [] }> {

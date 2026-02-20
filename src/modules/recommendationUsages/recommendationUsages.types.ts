@@ -7,10 +7,8 @@ export type RecommendationUsagesRequest = Request<
   },
   {},
   {
-    recommendation_id?: number;
-    order_item_id?: string;
-    confirmed_by?: number;
-    is_influenced?: boolean;
+    confirmed_by: number;
+    recommendation_usages: RecommendationUsage[] | [];
   }
 >;
 export type RecommendationUsagesResponse = Response<{

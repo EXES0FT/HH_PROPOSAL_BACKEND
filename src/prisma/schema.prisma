@@ -107,7 +107,6 @@ model OrderItem {
     cikkszam  String  @db.VarChar(50)
 
     order                Order                 @relation(fields: [sorszam], references: [sorszam], name: "OrderToOrderItem")
-    recommendationUsages RecommendationUsage[] @relation("OrderItemToRecommendationUsage")
 
     @@map("order_items")
 }
@@ -134,17 +133,15 @@ model Recommendation {
 model RecommendationUsage {
     id                Int      @id @default(autoincrement())
     recommendation_id Int
-    order_item_id     String   @db.VarChar(10)
+    order_item_id     String?  @db.VarChar(10)
     confirmed_by      Int
     is_influenced     Boolean  @default(false) @db.TinyInt
     created_at        DateTime @default(now())
 
     recommendation Recommendation @relation(fields: [recommendation_id], references: [id], name: "RecommendationToRecommendationUsage")
-    orderItem      OrderItem      @relation(fields: [order_item_id], references: [unikazon], name: "OrderItemToRecommendationUsage")
     user           User           @relation(fields: [confirmed_by], references: [id], name: "UserToRecommendationUsage")
 
     @@index([confirmed_by], name: "idx_recommendation_usages_confirmed_by")
     @@index([recommendation_id], name: "idx_recommendation_usages_recommendation_id")
-    @@index([order_item_id], name: "idx_recommendation_usages_order_item_id")
     @@map("recommendation_usages")
 }
